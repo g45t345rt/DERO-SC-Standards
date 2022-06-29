@@ -1,11 +1,11 @@
-# G45-NFT-Standard
+# G45-NFT-Standard (PUBLIC)
 
-`DONT USE SMART CONTRACT YET - NOT TESTED`
+`DONT USE SMART CONTRACT - NOT TESTED - UNDER REVIEW`
 
 This NFT Standard uses one Smart Contract for the entire NFT Collection.  
 If you modify the code, it won't be seen as a valid G45-NFT-Standard within community apps.  
 
-The G45-NFT-Standard hash signature would be   `F271598058703C36ACF57B144B894B46219C6ED55763E6225D890DF2C9693C2C`
+The G45-NFT-Standard SC_CODE data would be `F271598058703C36ACF57B144B894B46219C6ED55763E6225D890DF2C9693C2C` <= this will change until I finish
 
 ## Features
 
@@ -41,6 +41,7 @@ Arguments
 - index = The NFT index (1,2,3,4,5...)
 - metadata = The NFT values/attributes - preferably in URLSearchParams format but I have no control over this so you can put whatever you want
 Dero Seals example: `background=33&base=31&hairAndHats=12&shirts=4`
+- soulbound = The NFT cannot be transfered - 0 is false, 1 is true
 
 ### Transfer
 
@@ -77,7 +78,7 @@ Arguments
 
 ### SetRoyaltyFees
 
-Set the royalty fees of your NFT Collection.
+Set the royalty fees of your NFT Collection. Can only set a number lower than the current royalty fee.
 
 Arguments
 

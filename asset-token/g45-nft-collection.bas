@@ -15,5 +15,5 @@ Function Initialize() Uint64
 // STORE("nft_cc7096b195f3a7cba04710daae91693f987a78f9663c0b019b8dd0c16bb50a20", 1)
 // STORE("nft_8864daabc4071d7436c6f30ad073400342e2f3f28ae5c07a7f82212e38fbb9f4", 2)
 // STORE("nft_ea42dac3de8f883e98232d978d8ae0c15c590e244282fda7d73bba5096de6a4b", 3)
-20 RETURN 0
+30 RETURN 0
 End Function
