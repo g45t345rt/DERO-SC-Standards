@@ -24,7 +24,7 @@ Function InitStore(name String, supply Uint64, canBurn Uint64, royaltyFees Uint6
 130 RETURN 0
 End Function
 
-Function Mint(index Uint64, metadata String, soulBound Uint64) Uint64
+Function Mint(index Uint64, metadata String, soulBound Uint64, frozen Uint64) Uint64
 10 IF LOAD("owner") == SIGNER() THEN GOTO 30
 20 RETURN 1
 30 IF index > 0 THEN GOTO 50
@@ -35,12 +35,30 @@ Function Mint(index Uint64, metadata String, soulBound Uint64) Uint64
 80 RETURN 1
 90 IF soulBound <= 1 THEN GOTO 110
 100 RETURN 1
-110 STORE(nftKey(index, "owner"), SIGNER())
-120 STORE(nftKey(index, "metadata"), metadata)
-130 STORE(nftKey(index, "mintTimestamp"), BLOCK_TIMESTAMP())
-140 STORE(nftKey(index, "soulBound"), soulBound)
-150 STORE(nftKey(index, "transferCount"), 0)
-160 RETURN 0
+110 IF frozen <= 1 THEN GOTO 130
+120 RETURN 1
+130 STORE(nftKey(index, "owner"), SIGNER())
+140 STORE(nftKey(index, "metadata"), metadata)
+150 STORE(nftKey(index, "mintTimestamp"), BLOCK_TIMESTAMP())
+160 STORE(nftKey(index, "soulBound"), soulBound)
+170 STORE(nftKey(index, "frozen"), frozen)
+180 STORE(nftKey(index, "transferCount"), 0)
+190 RETURN 0
+End Function
+
+Function SetNFT(index Uint64, metadata String, soulBound Uint64, frozen Uint64) Uint64
+10 IF LOAD("owner") == SIGNER() THEN GOTO 30
+20 RETURN 1
+30 IF LOAD(nftKey(index, "frozen")) == 0 THEN GOTO 50
+40 RETURN 1
+50 IF soulBound <= 1 THEN GOTO 110
+60 RETURN 1
+70 IF frozen <= 1 THEN GOTO 130
+80 RETURN 1
+90 STORE(nftKey(index, "metadata"), metadata)
+100 STORE(nftKey(index, "soulBound"), soulBound)
+110 STORE(nftKey(index, "frozen"), frozen)
+120 RETURN 0
 End Function
 
 Function Transfer(index Uint64, newOwner String, assetToken String, price Uint64) Uint64
