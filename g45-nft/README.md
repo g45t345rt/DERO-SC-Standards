@@ -82,6 +82,7 @@ Arguments
 
 The owner of the NFT can use this function to burn his NFT.  
 Litteraly! Not just setting an empty owner address.  
+Can't burn if NFT is in transfer.
 
 Arguments
 

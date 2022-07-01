@@ -10,7 +10,7 @@ Function Add(nft String) Uint64
 20 RETURN 1
 30 IF EXISTS("nft_" + nft) == 0 THEN GOTO 50
 40 RETURN 1
-50 STORE("nft_" + nft, 1)
+50 STORE("nft_" + nft, "")
 60 STORE("nft_count", LOAD("nft_count") + 1)
 70 RETURN 0
 End Function

@@ -65,7 +65,7 @@ Function Transfer(index Uint64, newOwner String, assetToken String, price Uint64
 10 IF LOAD(nftKey(index, "owner")) == SIGNER() THEN GOTO 30
 20 RETURN 1
 30 IF LOAD(nftKey(index, "soulBound")) == 0 THEN GOTO 60
-40 IF LOAD(nftKey(index, "transferCount")) == 0 THEN GOTO
+40 IF LOAD(nftKey(index, "transferCount")) == 0 THEN GOTO 60
 50 RETURN 1
 60 STORE(nftKey(index, "transferOwner"), ADDRESS_RAW(newOwner))
 70 STORE(nftKey(index, "transferAssetToken"), assetToken)
@@ -88,11 +88,11 @@ Function ClaimTransfer(index Uint64) Uint64
 110 IF DEROVALUE() != price THEN GOTO 250
 120 SEND_DERO_TO_ADDRESS(LOAD(nftKey(index, "owner")), price - royaltyCut)
 130 SEND_DERO_TO_ADDRESS(LOAD("owner"), royaltyCut)
-140 IF assetToken != "" THEN GOTO 150
+140 IF assetToken == "" THEN GOTO 180
 150 IF ASSETVALUE(assetToken) != price THEN GOTO 250
 160 SEND_ASSET_TO_ADDRESS(LOAD(nftKey(index, "owner")), price - royaltyCut, assetToken)
 170 SEND_ASSET_TO_ADDRESS(LOAD("owner"), royaltyCut, assetToken)
-180 STORE(nftKey(index, "owner", signer))
+180 STORE(nftKey(index, "owner"), signer)
 190 DELETE(nftKey(index, "transferOwner"))
 200 DELETE(nftKey(index, "transferAssetToken"))
 210 DELETE(nftKey(index, "transferPrice"))
@@ -117,11 +117,13 @@ Function Burn(index Uint64) Uint64
 20 RETURN 1
 30 IF LOAD("can_burn") == 1 THEN GOTO 50
 40 RETURN 1
-50 DELETE(nftKey(index, "owner"))
-60 DELETE(nftKey(index, "metadata"))
-70 DELETE(nftKey(index, "mintTimestamp"))
-80 DELETE(nftKey(index, "soulBound"))
-90 RETURN 0
+50 IF EXISTS(nftKey(index, "transferOwner")) == 0 THEN GOTO 70
+60 RETURN 1
+70 DELETE(nftKey(index, "owner"))
+80 DELETE(nftKey(index, "metadata"))
+90 DELETE(nftKey(index, "mintTimestamp"))
+100 DELETE(nftKey(index, "soulBound"))
+110 RETURN 0
 End Function
 
 Function SetRoyaltyFees(amount Uint64) Uint64
@@ -136,7 +138,7 @@ End Function
 Function SetBurn(value Uint64) Uint64
 10 IF LOAD("owner") == SIGNER() THEN GOTO 30
 20 RETURN 1
-30 IF amount < 1 THEN GOTO 50
+30 IF value <= 1 THEN GOTO 50
 40 RETURN 1
 50 STORE("can_burn", value)
 60 RETURN 0
