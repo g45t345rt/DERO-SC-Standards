@@ -2,9 +2,9 @@
 
 `DO NOT USE - NOT TESTED - STILL UNDER REVIEW`
 
-A real public/private DERO NFT Asset Token.
+A real public/private DERO NFT Asset Token.  
 The SCID is the NFT token unique hash and the balance represent prints/supply usually 1.  
-This NFT Standard uses multiple Smart Contracts to match NFT with a collection.
+This NFT Standard uses multiple Smart Contracts to match NFT with a collection.  
 
 - One smart contract per NFTs (not efficient but only way to get real Asset Token)
 - One master smart contract listing all NFTs SCID from the collection
@@ -19,7 +19,7 @@ It contains the NFT metadata and can be initialize to be public or private.
 Use `Initialize()` for public NFT and the SC_CODE checksum should be
 `0E5CF6355D11984E2EF71E1C9871764FA636264A91A6908791A6E496DC1591E6`
 
-Use `PrivateInitialize()` for private NFT and the SC_CODE checksum should be
+Use `InitializePrivate()` for private NFT and the SC_CODE checksum should be
 `F2107D38B401BB5F34F35BA7014FB9DC5CF01E4E5311E2B0CC373FA7F20E3ECA`
 
 ### InitStore
