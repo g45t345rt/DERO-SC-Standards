@@ -1,10 +1,7 @@
-# G45-NFT-Standard (PUBLIC)
+# G45-NFT-Standard (NOT AN ACTUAL TOKEN)
 
 This NFT Standard uses one Smart Contract for the entire NFT Collection.  
 If you modify the code, it won't be seen as a valid G45-NFT-Standard within community apps.  
-
-The G45-NFT SC_CODE checksum is `F271598058703C36ACF57B144B894B46219C6ED55763E6225D890DF2C9693C2C` <= this will change until I finish
-
 The NFT unique id is the SCID + index number.  
 
 ## Features
