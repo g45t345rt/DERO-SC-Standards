@@ -1,8 +1,9 @@
-# G45-NFT-Standard (NOT AN ACTUAL TOKEN)
+# T345-NFT-Standard (NOT AN ACTUAL TOKEN)
+
+`DO NOT USE - NOT TESTED - STILL UNDER REVIEW`
 
 This NFT Standard uses one Smart Contract for the entire NFT Collection.  
-If you modify the code, it won't be seen as a valid G45-NFT-Standard within community apps.  
-The NFT unique id is the SCID + index number.  
+The NFT unique id is the SCID() + index number. It is not a real asset token.  
 
 ## Features
 
