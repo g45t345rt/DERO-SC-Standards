@@ -60,7 +60,7 @@ Function stateExists(key String) Uint64
 End Function
 
 Function storeTX()
-10 storeStateInt("txid_" + HEX(TXID()), 1)
+10 STORE("txid_" + HEX(TXID()), 1)
 20 RETURN
 End Function
 

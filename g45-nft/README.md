@@ -29,7 +29,7 @@ Set initial NFT values - supply, metadata and frozen.
 - collection = The SCID of the master smart contract
 - supply - Amount of NFT prints in atomic value
 - metadata = The NFT values/attributes - preferably in URLSearchParams format but I have no control over this so you can put whatever you want
-Dero Seals example: `trait_background=33&trait_base=31&trait_hairAndHats=12&trait_shirts=4`
+Dero Seals example: `trait_background=33&trait_base=31&trait_hairAndHats=12&trait_shirts=4&fileNumber=1&rarity=243.12`
 - frozenMetadata = Immutable metadata - 0 is false, 1 is true
 - frozenSupply = Immutable supply - 0 is false, 1 is true
 
@@ -38,7 +38,10 @@ Dero Seals example: `trait_background=33&trait_base=31&trait_hairAndHats=12&trai
 Change NFT metadata if not frozen
 
 - metadata = The NFT values/attributes - preferably in URLSearchParams format but I have no control over this so you can put whatever you want
-Dero Seals example: `trait_background=33&trait_base=31&trait_hairAndHats=12&trait_shirts=4`
+Dero Seals example: `trait_background=33&trait_base=31&trait_hairAndHats=12&trait_shirts=4&fileNumber=1&rarity=243.12`
+
+A variable should be camelCase -> `fileNumber`  
+A list should be represented by a prefix + underscore -> `trait_`  
 
 ### AddSupply
 
