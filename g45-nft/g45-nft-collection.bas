@@ -65,31 +65,33 @@ Function storeTX()
 End Function
 
 Function Initialize() Uint64
-10 STORE("owner", SIGNER())
-20 STORE("type", "G45-NFT-COLLECTION")
-30 STORE("lock", 0)
-40 initCommit()
-50 RETURN 0
+10 IF EXISTS("owner") == 0 THEN GOTO 30
+20 RETURN 1
+30 STORE("owner", SIGNER())
+40 STORE("type", "G45-NFT-COLLECTION")
+50 STORE("lock", 0)
+60 initCommit()
+70 RETURN 0
 End Function
 
 Function Lock() Uint64
 10 IF LOAD("owner") == SIGNER() THEN GOTO 30
 20 RETURN 1
 30 STORE("lock", 1)
-40 RETURN 0
+40 storeTX()
+50 RETURN 0
 End Function
 
 Function Set(nft String, index Uint64) Uint64
-10 DIM ctr as Uint64
-20 IF LOAD("owner") == SIGNER() THEN GOTO 40
-30 RETURN 1
-40 IF LOAD("lock") == 0 THEN GOTO 60
-50 RETURN 1
-60 beginCommit()
-70 storeStateInt("nft_" + nft, index)
-80 endCommit()
-90 storeTX()
-100 RETURN 0
+10 IF LOAD("owner") == SIGNER() THEN GOTO 30
+20 RETURN 1
+30 IF LOAD("lock") == 0 THEN GOTO 50
+40 RETURN 1
+50 beginCommit()
+60 storeStateInt("nft_" + nft, index)
+70 endCommit()
+80 storeTX()
+90 RETURN 0
 End Function
 
 Function Del(nft String) Uint64

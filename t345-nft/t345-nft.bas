@@ -3,9 +3,11 @@ Function nftKey(index String, key String) String
 End Function
 
 Function Initialize() Uint64
-10 STORE("owner", SIGNER())
-20 STORE("type", "G45-NFT")
-30 RETURN 0
+10 IF EXISTS("owner") == 0 THEN GOTO 30
+20 RETURN 1
+30 STORE("owner", SIGNER())
+40 STORE("type", "T345-NFT")
+50 RETURN 0
 End Function
 
 Function InitStore(name String, supply Uint64, canBurn Uint64, royaltyFees Uint64) Uint64
