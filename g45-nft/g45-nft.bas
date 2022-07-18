@@ -4,7 +4,7 @@ Function storeTX()
 End Function
 
 Function InitializePrivate() Uint64
-10 IF EXISTS("owner") == 0 THEN GOTO 30
+10 IF EXISTS("minter") == 0 THEN GOTO 30
 20 RETURN 1
 30 STORE("minter", SIGNER())
 40 STORE("type", "G45-NFT")
