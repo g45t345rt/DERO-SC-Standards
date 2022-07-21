@@ -64,6 +64,17 @@ Set the metadata immutable if not already
 
 Set the supply immutable if not already
 
+### DisplayToken
+
+Because the token is private there is know way to know if you own the NFT within dapps.  
+Use this function to send the token and display the signer address.  
+
+### RetrieveToken
+
+Retrieve the locked tokens within smart contract
+
+- amount = The amount of token to retrieve
+
 ## G45-NFT-COLLECTION Smart Contract
 
 The SC_CODE checksum is ``
