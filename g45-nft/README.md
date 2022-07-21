@@ -11,6 +11,15 @@ This NFT Standard uses multiple Smart Contracts to match NFT with a collection.
 
 If you modify the code, it won't be seen as a valid G45-NFT-Standard within community apps.  
 
+## What are the functionalities?
+
+- You can verify the authenticity of the NFT with the minter address
+- You can prove that you own the NFT with your balance
+- You can transfer/trade the NFT to another wallet or send the asset token to whatever smart contract
+- The NFT values/attributes can be immutable
+- The NFT supply can be immutable
+- You can burn the NFT by sending the balance to a null address (I think?)
+
 ## G45-NFT Smart Contract
 
 This smart contract represent the actual NFT.  
@@ -29,18 +38,18 @@ Set initial NFT values - supply, metadata and frozen.
 - collection = The SCID of the master smart contract
 - supply - Amount of NFT prints in atomic value
 - metadata = The NFT values/attributes - preferably in URLSearchParams format but I have no control over this so you can put whatever you want
-Dero Seals example: `trait_background=33&trait_base=31&trait_hairAndHats=12&trait_shirts=4&fileNumber=1&rarity=243.12`
-- frozenMetadata = Immutable metadata - 0 is false, 1 is true
-- frozenSupply = Immutable supply - 0 is false, 1 is true
+Dero Seals example: `trait_background=33&trait_base=31&trait_hairAndHats=12&trait_shirts=4&id=1&rarity=243.12`
+- freezeMetadata = Immutable metadata - 0 is false, 1 is true
+- freezeSupply = Immutable supply - 0 is false, 1 is true
 
 ### SetMetadata
 
 Change NFT metadata if not frozen
 
 - metadata = The NFT values/attributes - preferably in URLSearchParams format but I have no control over this so you can put whatever you want
-Dero Seals example: `trait_background=33&trait_base=31&trait_hairAndHats=12&trait_shirts=4&fileNumber=1&rarity=243.12`
+Dero Seals example: `trait_background=33&trait_base=31&trait_hairAndHats=12&trait_shirts=4&id=1&rarity=243.12`
 
-A variable should be camelCase -> `fileNumber`  
+A variable should be camelCase -> `hairAndHats`  
 A list should be represented by a prefix + underscore -> `trait_`  
 
 ### AddSupply
@@ -63,17 +72,37 @@ This represent your NFT Collection and should list all minted NFTs.
 Make sure owner match with minter.
 This is necessary in order to verify authenticity of the NFT.  
 
-### Add
+### SetNft
 
 Include a new minted NFT to the collection.
 
 - nft = SCID of the NFT smart contract
+- index = number representing the nft
 
-## What are the functionalities?
+### DelNft
 
-- You can verify the authenticity of the NFT with the minter address
-- You can prove that you own the NFT with your balance
-- You can transfer/trade the NFT to another wallet or send the asset token to whatever smart contract
-- The NFT values/attributes can be immutable
-- The NFT supply can be immutable
-- You can burn the NFT by sending the balance to a null address (I think?)
+Remove NFT from collection
+
+- nft = SCID of the NFT smart contract
+
+### Freeze
+
+Set the SC immutable. You can set or delete NFT afterwards.
+
+### SetData
+
+Set specific key/value data.
+
+- key = Key string
+- value = Value string
+
+Example:  
+Set the nft image url for Dero Seals  
+`SetData("image", "https://imagedelivery.net/zAjZFa6f2RjCu5A0cXIeHA/dero-seals-{id}/default")`  
+Software will need to replace `{id}` with NFT id  
+
+### DelData
+
+Remove key/value pair.
+
+- key = Data key string

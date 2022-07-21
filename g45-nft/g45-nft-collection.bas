@@ -59,51 +59,59 @@ Function stateExists(key String) Uint64
 10 RETURN EXISTS("state_" + key)
 End Function
 
-Function storeTX()
-10 STORE("txid_" + HEX(TXID()), 1)
-20 RETURN
-End Function
-
 Function Initialize() Uint64
 10 IF EXISTS("owner") == 0 THEN GOTO 30
 20 RETURN 1
 30 STORE("owner", SIGNER())
 40 STORE("type", "G45-NFT-COLLECTION")
-50 STORE("lock", 0)
+50 STORE("frozen", 0)
 60 initCommit()
 70 RETURN 0
 End Function
 
-Function Lock() Uint64
+Function Freeze() Uint64
 10 IF LOAD("owner") == SIGNER() THEN GOTO 30
 20 RETURN 1
-30 STORE("lock", 1)
-40 storeTX()
-50 RETURN 0
+30 STORE("frozen", 1)
+40 RETURN 0
 End Function
 
-Function Set(nft String, index Uint64) Uint64
+Function SetNft(nft String, index Uint64) Uint64
 10 IF LOAD("owner") == SIGNER() THEN GOTO 30
 20 RETURN 1
-30 IF LOAD("lock") == 0 THEN GOTO 50
+30 IF LOAD("frozen") == 0 THEN GOTO 50
 40 RETURN 1
 50 beginCommit()
 60 storeStateInt("nft_" + nft, index)
 70 endCommit()
-80 storeTX()
-90 RETURN 0
+80 RETURN 0
 End Function
 
-Function Del(nft String) Uint64
+Function DelNft(nft String) Uint64
 10 IF LOAD("owner") == SIGNER() THEN GOTO 30
 20 RETURN 1
-30 IF LOAD("lock") == 0 THEN GOTO 50
+30 IF LOAD("frozen") == 0 THEN GOTO 50
 40 RETURN 1
-50 IF stateExists("nft_" + nft) == 1 THEN GOTO 70
-60 RETURN 1
-70 beginCommit()
-80 deleteState("nft_" + nft)
-90 endCommit()
-100 storeTX()
-110 RETURN 0
+50 beginCommit()
+60 deleteState("nft_" + nft)
+70 endCommit()
+80 RETURN 0
+End Function
+
+Function SetData(key String, value String) Uint64
+10 IF LOAD("owner") == SIGNER() THEN GOTO 30
+20 RETURN 1
+30 beginCommit()
+40 storeStateString("data_" + key, value)
+50 endCommit()
+60 RETURN 0
+End Function
+
+Function DelData(key String) Uint64
+10 IF LOAD("owner") == SIGNER() THEN GOTO 30
+20 RETURN 1
+30 beginCommit()
+40 deleteState("data_" + key)
+50 endCommit()
+60 RETURN 0
 End Function
