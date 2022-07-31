@@ -97,24 +97,14 @@ Remove NFT from collection
 
 - nft = SCID of the NFT smart contract
 
-### Freeze
+### FreezeMetadata
 
-Set the SC immutable. You can't set or delete NFTs afterwards.
+Set the collection metadata immutable. You can't change the metadata afterwards.
 
-### SetData
+### FreezeCollection
 
-Set specific key/value data.
+Set the NFT collection immutable. You can't set or delete NFTs afterwards.
 
-- key = Key string
-- value = Value string
+### SetMetadata
 
-Example:  
-Set the nft image url for Dero Seals  
-`SetData("image", "https://imagedelivery.net/zAjZFa6f2RjCu5A0cXIeHA/dero-seals-{id}/default")`  
-Software will need to replace `{id}` with NFT id  
-
-### DelData
-
-Remove key/value pair.
-
-- key = Data key string
+Change collection metadata if not frozen
