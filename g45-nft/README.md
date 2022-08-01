@@ -38,8 +38,8 @@ Set initial NFT values - supply, metadata, freezeMetadata and freezeSupply.
 
 - collection = The SCID of the master smart contract (can be empty if you did not deploy a collection)
 - supply - Amount of NFT prints in atomic value
-- metadata = The NFT values/attributes - preferably in URLSearchParams format but I have no control over this so you can put whatever you want
-Dero Seals example: `trait_background=33&trait_base=31&trait_hairAndHats=12&trait_shirts=4&id=1&rarity=243.12`
+- metadata = The NFT values/attributes - preferably in JSON Stringify format but I have no control over this so you can put whatever you want
+Dero Seals example: `"{\"id\":2,\"rarity\":271.51,\"attributes\":{\"background\":33,\"base\":31,\"eyes\":8,\"hair_and_hats\":12,\"shirts\":2}}"`
 - freezeMetadata = Immutable metadata - 0 is false, 1 is true
 - freezeSupply = Immutable supply - 0 is false, 1 is true
 
@@ -47,11 +47,7 @@ Dero Seals example: `trait_background=33&trait_base=31&trait_hairAndHats=12&trai
 
 Change NFT metadata if not frozen
 
-- metadata = The NFT values/attributes - preferably in URLSearchParams format but I have no control over this so you can put whatever you want
-Dero Seals example: `trait_background=33&trait_base=31&trait_hairAndHats=12&trait_shirts=4&id=1&rarity=243.12`
-
-A variable should be camelCase -> `hairAndHats`  
-A list should be represented by a prefix + underscore -> `trait_`  
+- metadata = Check InitStore metadata example
 
 ### AddSupply
 
@@ -107,4 +103,6 @@ Set the NFT collection immutable. You can't set or delete NFTs afterwards.
 
 ### SetMetadata
 
-Change collection metadata if not frozen
+Change collection metadata if not frozen - preferably in JSON format
+
+- metadata = Check InitStore metadata example

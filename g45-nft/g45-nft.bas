@@ -66,10 +66,10 @@ Function DisplayToken() Uint64
 20 DIM signerString as String
 30 LET signerString = ADDRESS_STRING(SIGNER())
 40 LET amount = 0
-50 IF EXISTS(signerString) == 0 THEN GOTO 70
-60 LET amount = LOAD(signerString)
+50 IF EXISTS("owner_" + signerString) == 0 THEN GOTO 70
+60 LET amount = LOAD("owner_" + signerString)
 70 LET amount = amount + ASSETVALUE(SCID())
-80 STORE(signerString, amount)
+80 STORE("owner_" + signerString, amount)
 90 RETURN 0
 End Function
 
@@ -77,14 +77,14 @@ Function RetrieveToken(amount Uint64) Uint64
 10 DIM storedAmount as Uint64
 20 DIM signerString as String
 30 LET signerString = ADDRESS_STRING(SIGNER())
-40 LET storedAmount = LOAD(signerString)
+40 LET storedAmount = LOAD("owner_" + signerString)
 50 IF amount <= storedAmount THEN GOTO 70
 60 RETURN 1
 70 SEND_ASSET_TO_ADDRESS(SIGNER(), amount, SCID())
 80 LET storedAmount = storedAmount - amount
 90 IF storedAmount == 0 THEN GOTO 120
-100 STORE(signerString, storedAmount)
+100 STORE("owner_" + signerString, storedAmount)
 110 RETURN 0
-120 DELETE(signerString)
+120 DELETE("owner_" + signerString)
 130 RETURN 0
 End Function
