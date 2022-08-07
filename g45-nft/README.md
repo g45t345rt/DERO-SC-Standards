@@ -18,7 +18,7 @@ If you modify the code, it won't be seen as a valid G45-NFT-Standard within comm
 - You can transfer/trade the NFT to another wallet or send the asset token to whatever smart contract
 - The NFT values/attributes can be immutable
 - The NFT supply can be immutable
-- You can burn the NFT by sending the balance to a null address (I think?)
+- You can burn the NFT publicly or privately
 - You can increase supply and sell multiple instances of the same NFT. Total supply is transaparent and minter can't cheat.  
 
 ## G45-NFT Smart Contract
@@ -53,13 +53,17 @@ Change NFT metadata if not frozen
 
 Increment NFT supply if not frozen
 
-### FreezeMetadata
+### Burn
 
-Set the metadata immutable if not already
+Publicly burn NFT supply. In Dero you can burn any asset with a transaction but use this if you want to apply changes to the `supply` variable.
 
-### FreezeSupply
+### Freeze
 
-Set the supply immutable if not already
+Freeze supply, metadata or collection SCID. Make variables immutable.  
+
+- supply = 0:skip, 1:freeze
+- metadata = 0:skip, 1:freeze
+- collection = 0:skip, 1:freeze
 
 ### DisplayToken
 
@@ -72,6 +76,20 @@ Retrieve the locked tokens within smart contract
 
 - amount = The amount of token to retrieve
 
+### TransferMinter
+
+Initiate minter wallet address change
+
+- newMinter = wallet address
+
+### CancelTransferMinter
+
+Cancel pending minter transfer
+
+### ClaimMinter
+
+Claim pending minter address
+
 ## G45-NFT-COLLECTION Smart Contract
 
 The SC_CODE checksum is ``
@@ -82,7 +100,7 @@ You don't have to deploy a smart contract collection but it increases the authen
 
 ### SetNft
 
-Set a NFT to the collection.
+Set a NFT to the collection. Increment `nftCount` if does not already exists.
 
 - nft = SCID of the NFT smart contract
 - index = whatever index/number representing the nft
@@ -93,16 +111,29 @@ Remove NFT from collection
 
 - nft = SCID of the NFT smart contract
 
-### FreezeMetadata
+### Freeze
 
-Set the collection metadata immutable. You can't change the metadata afterwards.
+Freeze metadata or collection/nfts. Make variables immutable.  
 
-### FreezeCollection
-
-Set the NFT collection immutable. You can't set or delete NFTs afterwards.
+- collection = 0:skip, 1:freeze
+- metadata = 0:skip, 1:freeze
 
 ### SetMetadata
 
 Change collection metadata if not frozen - preferably in JSON format
 
 - metadata = Check InitStore metadata example
+
+### TransferOwnership
+
+Initiate new smart contract ownership
+
+- newOwner = wallet address
+
+### CancelOwnership
+
+Cancel pending ownership transfer
+
+### ClaimOwnership
+
+Claim pending ownership

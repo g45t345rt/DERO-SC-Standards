@@ -2,30 +2,34 @@ Function InitializePrivate() Uint64
 10 IF EXISTS("minter") == 0 THEN GOTO 30
 20 RETURN 1
 30 STORE("minter", SIGNER())
-40 STORE("type", "G45-NFT")
-50 STORE("init", 0)
-60 RETURN 0
+40 STORE("originalMinter", SIGNER())
+50 STORE("type", "G45-NFT")
+60 STORE("init", 0)
+70 RETURN 0
 End Function
 
-Function InitStore(collection String, supply Uint64, metadata String, freezeMetadata Uint64, freezeSupply Uint64) Uint64
+Function InitStore(collection String, supply Uint64, metadata String, freezeCollection Uint64, freezeSupply Uint64, freezeMetadata Uint64) Uint64
 10 IF LOAD("minter") == SIGNER() THEN GOTO 30
 20 RETURN 1
 30 IF LOAD("init") == 0 THEN GOTO 50
 40 RETURN 1
 50 IF supply > 0 THEN GOTO 70
 60 RETURN 1
-70 IF freezeMetadata <= 1  THEN GOTO 90
+70 IF freezeCollection <= 1  THEN GOTO 90
 80 RETURN 1
 90 IF freezeSupply <= 1  THEN GOTO 110
 100 RETURN 1
-110 SEND_ASSET_TO_ADDRESS(LOAD("minter"), supply, SCID())
-120 STORE("collection", collection)
-130 STORE("metadata", metadata)
-140 STORE("supply", supply)
-150 STORE("frozenMetadata", freezeMetadata)
-160 STORE("frozenSupply", freezeSupply)
-170 STORE("init", 1)
-180 RETURN 0
+110 IF freezeMetadata <= 1  THEN GOTO 130
+120 RETURN 1
+130 SEND_ASSET_TO_ADDRESS(LOAD("minter"), supply, SCID())
+140 STORE("collection", collection)
+150 STORE("supply", supply)
+160 STORE("metadata", metadata)
+170 STORE("frozenCollection", freezeCollection)
+180 STORE("frozenMetadata", freezeMetadata)
+190 STORE("frozenSupply", freezeSupply)
+200 STORE("init", 1)
+210 RETURN 0
 End Function
 
 Function SetMetadata(metadata String) Uint64
@@ -34,6 +38,15 @@ Function SetMetadata(metadata String) Uint64
 30 IF LOAD("frozenMetadata") == 0 THEN GOTO 50
 40 RETURN 1
 50 STORE("metadata", metadata)
+60 RETURN 0
+End Function
+
+Function SetCollection(collection String) Uint64
+10 IF LOAD("minter") == SIGNER() THEN GOTO 30
+20 RETURN 1
+30 IF LOAD("frozenCollection") == 0 THEN GOTO 50
+40 RETURN 1
+50 STORE("collection", collection)
 60 RETURN 0
 End Function
 
@@ -47,30 +60,36 @@ Function AddSupply(supply Uint64) Uint64
 70 RETURN 0
 End Function
 
-Function FreezeMetadata() Uint64
-10 IF LOAD("minter") == SIGNER() THEN GOTO 30
-20 RETURN 1
-30 STORE("frozenMetadata", 1)
-40 RETURN 0
+Function Burn() Uint64
+10 STORE("supply", LOAD("supply") - ASSETVALUE(SCID()))
+20 RETURN 0
 End Function
 
-Function FreezeSupply() Uint64
+Function Freeze(supply Uint64, metadata Uint64, collection Uint64) Uint64
 10 IF LOAD("minter") == SIGNER() THEN GOTO 30
 20 RETURN 1
-30 STORE("frozenSupply", 1)
-40 RETURN 0
+30 IF supply == 0 THEN GOTO 50
+40 STORE("frozenSupply", 1)
+50 IF metadata == 0 THEN GOTO 70
+60 STORE("frozenMetadata", 1)
+70 IF collection == 0 THEN GOTO 90
+80 STORE("frozenCollection", 1)
+90 RETURN 0
 End Function
 
 Function DisplayToken() Uint64
 10 DIM amount as Uint64
 20 DIM signerString as String
 30 LET signerString = ADDRESS_STRING(SIGNER())
-40 LET amount = 0
-50 IF EXISTS("owner_" + signerString) == 0 THEN GOTO 70
-60 LET amount = LOAD("owner_" + signerString)
-70 LET amount = amount + ASSETVALUE(SCID())
-80 STORE("owner_" + signerString, amount)
-90 RETURN 0
+40 IF signerString != "" THEN GOTO 60
+50 RETURN 1
+60 LET amount = ASSETVALUE(SCID())
+70 IF amount > 0 THEN GOTO 90
+80 RETURN 1
+90 IF EXISTS("owner_" + signerString) == 0 THEN GOTO 110
+100 LET amount = amount + LOAD("owner_" + signerString)
+110 STORE("owner_" + signerString, amount)
+120 RETURN 0
 End Function
 
 Function RetrieveToken(amount Uint64) Uint64
@@ -87,4 +106,26 @@ Function RetrieveToken(amount Uint64) Uint64
 110 RETURN 0
 120 DELETE("owner_" + signerString)
 130 RETURN 0
+End Function
+
+Function TransferMinter(newMinter string) Uint64
+10 IF LOAD("minter") == SIGNER() THEN GOTO 30
+20 RETURN 1
+30 STORE("tempMinter", ADDRESS_RAW(newMinter))
+40 RETURN 0
+End Function
+
+Function CancelTransferMinter() Uint64
+10 IF LOAD("minter") == SIGNER() THEN GOTO 30
+20 RETURN 1
+30 DELETE("tempMinter")
+40 RETURN 0
+End Function
+
+Function ClaimMinter() Uint64
+10 IF LOAD("tempMinter") == SIGNER() THEN GOTO 30
+20 RETURN 1
+30 STORE("minter", SIGNER())
+40 DELETE("tempMinter")
+50 RETURN 0
 End Function
