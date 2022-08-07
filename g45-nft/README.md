@@ -3,7 +3,7 @@
 `DO NOT USE - NOT TESTED - STILL UNDER REVIEW`
 
 A real public/private DERO NFT Asset Token.  
-The SCID is the NFT token unique hash and the balance represent prints/supply usually 1.  
+The SCID is the NFT token unique hash and the balance represent prints/supply/ownership usually 1 for a traditional NFT.  
 This NFT Standard uses multiple Smart Contracts to match NFT with a collection.  
 
 - One smart contract per NFTs (not efficient but only way to get real Asset Token)
@@ -13,11 +13,12 @@ If you modify the code, it won't be seen as a valid G45-NFT-Standard within comm
 
 ## What are the functionalities?
 
-- You can verify the authenticity of the NFT with the minter address
+- You can verify the authenticity of the NFT with the minter/originalMinter address
 - You can prove that you own the NFT with your balance or by using `DisplayToken` to publicly prove ownership (for dapps).
 - You can transfer/trade the NFT to another wallet or send the asset token to whatever smart contract
 - The NFT values/attributes can be immutable
 - The NFT supply can be immutable
+- The NFT collection SCID can be immutable
 - You can burn the NFT publicly or privately
 - You can increase supply and sell multiple instances of the same NFT. Total supply is transaparent and minter can't cheat.  
 
@@ -34,12 +35,13 @@ Use `InitializePrivate()` for private NFT and the SC_CODE checksum should be
 
 ### InitStore
 
-Set initial NFT values - supply, metadata, freezeMetadata and freezeSupply.
+Set initial NFT values - supply, metadata, freezeMetadata, freezeSupply, freezeCollection.
 
 - collection = The SCID of the master smart contract (can be empty if you did not deploy a collection)
 - supply - Amount of NFT prints in atomic value
 - metadata = The NFT values/attributes - preferably in JSON Stringify format but I have no control over this so you can put whatever you want
 Dero Seals example: `"{\"id\":2,\"rarity\":271.51,\"attributes\":{\"background\":33,\"base\":31,\"eyes\":8,\"hair_and_hats\":12,\"shirts\":2}}"`
+- freezeCollection = Immutable collection SCID - 0 is false, 1 is true
 - freezeMetadata = Immutable metadata - 0 is false, 1 is true
 - freezeSupply = Immutable supply - 0 is false, 1 is true
 
@@ -55,7 +57,7 @@ Increment NFT supply if not frozen
 
 ### Burn
 
-Publicly burn NFT supply. In Dero you can burn any asset with a transaction but use this if you want to apply changes to the `supply` variable.
+Publicly burn NFT supply. In Dero you can burn any asset privately but use this if you want to apply changes to the `supply` variable.
 
 ### Freeze
 
