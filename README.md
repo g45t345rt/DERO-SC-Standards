@@ -1,13 +1,13 @@
 # DERO NFT Standards
 
-Two types of NFT standards with each their own strength.  
+Two types of NFT standards with each their own pros/cons.  
 Choose one that best fits your need.  
 
-## G45-NFT
+## G45-AT
 
-A real private/public DERO NFT Asset Token.  
-The SCID is the NFT token unique hash and the balance represent prints/supply usually 1.  
-This NFT Standard uses multiple Smart Contracts to match NFT within a collection.  
+A real private/public DERO Asset Token.  
+The SCID is the token unique hash and the balance represent owners/prints/supply usually 1 for a NFT.  
+The Standard uses multiple Smart Contracts to match nfts within a collection.  
 
 ## T345-NFT
 

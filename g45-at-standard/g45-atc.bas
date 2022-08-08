@@ -3,12 +3,13 @@ Function Initialize() Uint64
 20 RETURN 1
 30 STORE("owner", SIGNER())
 40 STORE("originalOwner", SIGNER())
-50 STORE("type", "G45-NFT-COLLECTION")
+50 STORE("type", "G45-ATC")
 60 STORE("frozenCollection", 0)
 70 STORE("frozenMetadata", 0)
 80 STORE("metadata", "")
-90 STORE("nftCount", 0)
-100 RETURN 0
+90 STORE("assetCount", 0)
+100 STORE("timestamp", BLOCK_TIMESTAMP())
+110 RETURN 0
 End Function
 
 Function Freeze(collection Uint64, metadata Uint64) Uint64
@@ -21,26 +22,26 @@ Function Freeze(collection Uint64, metadata Uint64) Uint64
 70 RETURN 0
 End Function
 
-Function SetNft(nft String, index Uint64) Uint64
+Function SetAsset(asset String, index Uint64) Uint64
 10 IF LOAD("owner") == SIGNER() THEN GOTO 30
 20 RETURN 1
 30 IF LOAD("frozenCollection") == 0 THEN GOTO 50
 40 RETURN 1
-50 IF EXISTS("nft_" + nft) == 1 THEN GOTO 70
-60 STORE("nftCount", LOAD("nftCount") + 1)
-70 STORE("nft_" + nft, index)
+50 IF EXISTS("asset_" + asset) == 1 THEN GOTO 70
+60 STORE("assetCount", LOAD("assetCount") + 1)
+70 STORE("asset_" + asset, index)
 80 RETURN 0
 End Function
 
-Function DelNft(nft String) Uint64
+Function DelAsset(asset String) Uint64
 10 IF LOAD("owner") == SIGNER() THEN GOTO 30
 20 RETURN 1
 30 IF LOAD("frozenCollection") == 0 THEN GOTO 50
 40 RETURN 1
-50 IF EXISTS("nft_" + nft) == 1 THEN GOTO 70
+50 IF EXISTS("asset_" + asset) == 1 THEN GOTO 70
 60 RETURN 1
-70 DELETE("nft_" + nft)
-80 STORE("nftCount", LOAD("nftCount") - 1)
+70 DELETE("asset_" + asset)
+80 STORE("assetCount", LOAD("assetCount") - 1)
 90 RETURN 0
 End Function
 

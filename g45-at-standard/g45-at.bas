@@ -3,9 +3,10 @@ Function InitializePrivate() Uint64
 20 RETURN 1
 30 STORE("minter", SIGNER())
 40 STORE("originalMinter", SIGNER())
-50 STORE("type", "G45-NFT")
+50 STORE("type", "G45-AT")
 60 STORE("init", 0)
-70 RETURN 0
+70 STORE("timestamp", BLOCK_TIMESTAMP())
+80 RETURN 0
 End Function
 
 Function InitStore(collection String, supply Uint64, metadata String, freezeCollection Uint64, freezeSupply Uint64, freezeMetadata Uint64) Uint64
