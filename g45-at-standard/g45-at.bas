@@ -9,7 +9,7 @@ Function InitializePrivate() Uint64
 80 RETURN 0
 End Function
 
-Function InitStore(collection String, supply Uint64, metadata String, freezeCollection Uint64, freezeSupply Uint64, freezeMetadata Uint64) Uint64
+Function InitStore(collection String, supply Uint64, metadataFormat String, metadata String, freezeCollection Uint64, freezeSupply Uint64, freezeMetadata Uint64) Uint64
 10 IF LOAD("minter") == SIGNER() THEN GOTO 30
 20 RETURN 1
 30 IF LOAD("init") == 0 THEN GOTO 50
@@ -25,21 +25,23 @@ Function InitStore(collection String, supply Uint64, metadata String, freezeColl
 130 SEND_ASSET_TO_ADDRESS(LOAD("minter"), supply, SCID())
 140 STORE("collection", collection)
 150 STORE("supply", supply)
-160 STORE("metadata", metadata)
-170 STORE("frozenCollection", freezeCollection)
-180 STORE("frozenMetadata", freezeMetadata)
-190 STORE("frozenSupply", freezeSupply)
-200 STORE("init", 1)
-210 RETURN 0
+160 STORE("metadataFormat", metadataFormat)
+170 STORE("metadata", metadata)
+180 STORE("frozenCollection", freezeCollection)
+190 STORE("frozenMetadata", freezeMetadata)
+200 STORE("frozenSupply", freezeSupply)
+210 STORE("init", 1)
+220 RETURN 0
 End Function
 
-Function SetMetadata(metadata String) Uint64
+Function SetMetadata(format String, metadata String) Uint64
 10 IF LOAD("minter") == SIGNER() THEN GOTO 30
 20 RETURN 1
 30 IF LOAD("frozenMetadata") == 0 THEN GOTO 50
 40 RETURN 1
-50 STORE("metadata", metadata)
-60 RETURN 0
+50 STORE("metadataFormat", format)
+60 STORE("metadata", metadata)
+70 RETURN 0
 End Function
 
 Function SetCollection(collection String) Uint64

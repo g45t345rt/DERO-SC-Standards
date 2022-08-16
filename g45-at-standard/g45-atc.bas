@@ -6,10 +6,11 @@ Function Initialize() Uint64
 50 STORE("type", "G45-ATC")
 60 STORE("frozenCollection", 0)
 70 STORE("frozenMetadata", 0)
-80 STORE("metadata", "")
-90 STORE("assetCount", 0)
-100 STORE("timestamp", BLOCK_TIMESTAMP())
-110 RETURN 0
+80 STORE("metadataFormat", "")
+90 STORE("metadata", "")
+100 STORE("assetCount", 0)
+110 STORE("timestamp", BLOCK_TIMESTAMP())
+120 RETURN 0
 End Function
 
 Function Freeze(collection Uint64, metadata Uint64) Uint64
@@ -45,13 +46,14 @@ Function DelAsset(asset String) Uint64
 90 RETURN 0
 End Function
 
-Function SetMetadata(metadata String) Uint64
+Function SetMetadata(format String, metadata String) Uint64
 10 IF LOAD("owner") == SIGNER() THEN GOTO 30
 20 RETURN 1
 30 IF LOAD("frozenMetadata") == 0 THEN GOTO 50
 40 RETURN 1
-50 STORE("metadata", metadata)
-60 RETURN 0
+50 STORE("metadataFormat", format)
+60 STORE("metadata", metadata)
+70 RETURN 0
 End Function
 
 Function TransferOwnership(newOwner string) Uint64

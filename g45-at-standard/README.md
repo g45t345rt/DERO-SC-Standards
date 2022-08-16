@@ -43,8 +43,8 @@ Set initial NFT values - supply, metadata, freezeMetadata, freezeSupply, freezeC
 
 - collection = The SCID of the master smart contract (can be empty if you did not deploy a collection)
 - supply - Amount of NFT prints in atomic value
-- metadata = The NFT values/attributes - preferably in JSON Stringify format but I have no control over this so you can put whatever you want
-Dero Seals example: `"{\"id\":2,\"rarity\":271.51,\"attributes\":{\"background\":33,\"base\":31,\"eyes\":8,\"hair_and_hats\":12,\"shirts\":2}}"`
+- metadataFormat = define metadata format usually json but can be anythin
+- metadata = The NFT values/attributes - Dero Seals example: `{"id":2,"rarity":271.51,"attributes":{"background":33,"base":31,"eyes":8,"hair_and_hats":12,"shirts":2}}`
 - freezeCollection = Immutable collection SCID - 0 is false, 1 is true
 - freezeMetadata = Immutable metadata - 0 is false, 1 is true
 - freezeSupply = Immutable supply - 0 is false, 1 is true
@@ -53,6 +53,7 @@ Dero Seals example: `"{\"id\":2,\"rarity\":271.51,\"attributes\":{\"background\"
 
 Change metadata if not frozen
 
+- format = declare metadata format (usually json)
 - metadata = Check InitStore metadata example
 
 ### AddSupply
@@ -126,8 +127,9 @@ Freeze metadata or collection. Make variables immutable.
 
 ### SetMetadata
 
-Change collection metadata if not frozen - preferably in JSON format
+Change collection metadata if not frozen
 
+- format = declare metadata format (usually json)
 - metadata = Check InitStore metadata example
 
 ### TransferOwnership
