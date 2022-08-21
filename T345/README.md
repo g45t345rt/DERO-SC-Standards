@@ -1,20 +1,13 @@
-# T345-NFT-Standard (NOT AN ACTUAL TOKEN)
+# T345 Standard (NOT AN ACTUAL TOKEN)
 
-`DO NOT USE - NOT TESTED - STILL UNDER REVIEW`
+`DO NOT USE - UNDER DEVELOPMENT`
 
-This NFT Standard uses one Smart Contract for the entire NFT Collection.  
+This standard uses one Smart Contract for the entire asset collection.  
 The NFT unique id is the SCID() + index number. It is not a real asset token.  
 
 ## Features
 
-- You can verify the authenticity of the NFT Collection with the owner address
-- You can prove that you own the NFT
-- You can transfer/trade the NFT for DERO or any type of Asset Tokens
-- The Smart Contract and NFT metadata are immutable
-- You can burn the NFT - entirely deleted from Smart Contract (not just an empty owner address)
-- Creator can set a percentage of Royalty Fees when an NFT is transfered
-- Creator can set if NFTs can be burned at any time
-- An NFT can be set to soulbound. It can't be tranfered after initial transfer.
+TODO
 
 ## Smart Contract Functions
 

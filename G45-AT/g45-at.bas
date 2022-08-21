@@ -9,7 +9,7 @@ Function InitializePrivate() Uint64
 80 RETURN 0
 End Function
 
-Function InitStore(collection String, supply Uint64, metadataFormat String, metadata String, freezeCollection Uint64, freezeSupply Uint64, freezeMetadata Uint64) Uint64
+Function InitMint(collection String, supply Uint64, metadataFormat String, metadata String, freezeCollection Uint64, freezeSupply Uint64, freezeMetadata Uint64) Uint64
 10 IF LOAD("minter") == SIGNER() THEN GOTO 30
 20 RETURN 1
 30 IF LOAD("init") == 0 THEN GOTO 50
@@ -53,13 +53,13 @@ Function SetCollection(collection String) Uint64
 60 RETURN 0
 End Function
 
-Function AddSupply(supply Uint64) Uint64
+Function Mint(qty Uint64) Uint64
 10 IF LOAD("minter") == SIGNER() THEN GOTO 30
 20 RETURN 1
 30 IF LOAD("frozenSupply") == 0 THEN GOTO 50
 40 RETURN 1
-50 STORE("supply", LOAD("supply") + supply)
-60 SEND_ASSET_TO_ADDRESS(LOAD("minter"), supply, SCID())
+50 STORE("supply", LOAD("supply") + qty)
+60 SEND_ASSET_TO_ADDRESS(LOAD("minter"), qty, SCID())
 70 RETURN 0
 End Function
 

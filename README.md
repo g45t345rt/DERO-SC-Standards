@@ -1,19 +1,39 @@
-# DERO NFT Standards
+# DERO SC Standards
 
-Two types of NFT standards with each their own pros/cons.  
-Choose one that best fits your need.  
+This is repository where I post all of my Smart Contract Standards for the Dero Community.  
 
 ## G45-AT
 
-A real private/public DERO Asset Token.  
-The SCID is the token unique hash and the balance represent owners/prints/supply usually 1 for a NFT.  
-The Standard uses multiple Smart Contracts to match nfts within a collection.  
+This standard is a real private/public DERO Asset Token.  
+The SCID is the token unique hash and the balance represent owners/prints/supply. An NFT is usually a frozen supply of 1.  
 
-## T345-NFT
+Status: `DONE - UNDER REVIEW`  
 
-This NFT Standard uses one Smart Contract for the entire NFT Collection.  
-The NFT unique id is the SCID() + index number. It is not a real asset token.  
+## G45-ATC
+
+This standard describe a collection of G45-AT Smart Contracts or any other type of assets.  
+
+Status: `DONE - UNDER REVIEW`  
+
+## G45-ATS
+
+Status: `TODO`  
+
+## T345
+
+This standard uses one Smart Contract to represent an entire collection of assets.  
+The Asset unique id is the SCID() + index number. It is not a real asset token.  
+
+Status: `UNDER DEVELOPMENT`  
+
+## Meanings
+
+`G45` and `T345` has no meaning, it's just letters part of my username.  
+`AT` = Asset Token  
+`ATC` = Asset Token Collection
 
 ## Comparison Overview
 
-![nft standard comparison](https://github.com/g45t345rt/DERO-NFT-Standards/blob/master/dero-nft-standards.jpg?raw=true)
+A quick comparison between G45-AT and T345.  
+
+![sc standard comparison](https://github.com/g45t345rt/DERO-SC-Standards/blob/master/sc_comparison.jpg?raw=true)
