@@ -36,4 +36,4 @@ Status: `UNDER DEVELOPMENT`
 
 A quick comparison between G45-AT and T345.  
 
-![sc standard comparison](https://github.com/g45t345rt/DERO-SC-Standards/blob/master/sc_comparison.jpg?raw=true)
+![sc standard comparison](https://github.com/g45t345rt/DERO-SC-Standards/blob/master/sc_comparison.png?raw=true)
