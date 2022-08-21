@@ -7,8 +7,8 @@ The SCID is the token unique hash and the balance represent owners/prints/supply
 
 You can use the standard for basically anything like representing a single piece of art, artwork collection to event tickets, prints or simply a token.  
 The beauty of the standard is that if you modify the code it is very easy to know it's not authentic.  
-No code audit needed to validate smart contract legitimacy.  
-This avoids the task of reading the code to validate legitimacy.  
+
+`No code audit needed to validate smart contract legitimacy.`  
 
 For an NFT collection you need
 

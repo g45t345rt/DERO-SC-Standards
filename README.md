@@ -1,6 +1,6 @@
 # DERO SC Standards
 
-This is repository where I post all of my Smart Contract Standards for the Dero Community.  
+This is a repository where I post all of my Smart Contract standards for the Dero Community.  
 
 ## G45-AT
 
