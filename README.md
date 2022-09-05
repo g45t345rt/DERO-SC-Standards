@@ -15,10 +15,6 @@ This standard describe a collection of G45-AT Smart Contracts or any other type 
 
 Status: `DONE - UNDER REVIEW`  
 
-## G45-ATS
-
-Status: `TODO`  
-
 ## T345
 
 This standard uses one Smart Contract to represent an entire collection of assets.  

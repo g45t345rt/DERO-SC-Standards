@@ -33,7 +33,7 @@ Do not change the code other than the initialize function or the smart contract 
 
 ## Functions
 
-### InitMint
+### Initialize/InitializePrivate
 
 Set initial asset values - supply, metadata, metadataFormat, freezeMetadata, freezeSupply, freezeCollection.
 

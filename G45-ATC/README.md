@@ -7,6 +7,15 @@ You can pair this with G45-AT to create an NFT collection.
 
 ## Functions
 
+### Initialize/InitializePrivate
+
+Set initial collection values - metadataFormat, metadata, freezeMetadata, freezeCollection.
+
+- metadataFormat = define metadata format usually json but can be anything
+- metadata = The values/attributes describing the collection
+- freezeCollection = Immutable collection SCID - 0 is false, 1 is true
+- freezeMetadata = Immutable metadata - 0 is false, 1 is true
+
 ### SetAsset
 
 Set an asset to the collection. Increment `assetCount` if does not already exists.
