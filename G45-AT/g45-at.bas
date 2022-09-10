@@ -6,25 +6,21 @@ Function InitializePrivate(collection String, supply Uint64, metadataFormat Stri
 5 STORE("originalMinter", minter)
 6 STORE("type", "G45-AT")
 7 STORE("timestamp", BLOCK_TIMESTAMP())
-8 IF supply == 0 THEN GOTO 21
-9 IF freezeCollection > 1  THEN GOTO 21
-10 IF freezeSupply > 1  THEN GOTO 21
-11 IF freezeMetadata > 1  THEN GOTO 21
-12 SEND_ASSET_TO_ADDRESS(minter, supply, SCID())
-13 STORE("collection", collection)
-14 STORE("supply", supply)
-15 STORE("metadataFormat", metadataFormat)
-16 STORE("metadata", metadata)
-17 STORE("frozenCollection", freezeCollection)
-18 STORE("frozenSupply", freezeSupply)
-19 STORE("frozenMetadata", freezeMetadata)
-20 RETURN 0
-21 RETURN 1
+8 SEND_ASSET_TO_ADDRESS(minter, supply, SCID())
+9 STORE("collection", collection)
+10 STORE("supply", supply)
+11 STORE("metadataFormat", metadataFormat)
+12 STORE("metadata", metadata)
+13 STORE("frozenCollection", freezeCollection)
+14 STORE("frozenSupply", freezeSupply)
+15 STORE("frozenMetadata", freezeMetadata)
+16 RETURN 0
+17 RETURN 1
 End Function
 
 Function SetMetadata(format String, metadata String) Uint64
 1 IF LOAD("minter") != SIGNER() THEN GOTO 6
-2 IF LOAD("frozenMetadata") == 1 THEN GOTO 6
+2 IF LOAD("frozenMetadata") >= 1 THEN GOTO 6
 3 STORE("metadataFormat", format)
 4 STORE("metadata", metadata)
 5 RETURN 0
@@ -33,7 +29,7 @@ End Function
 
 Function SetCollection(collection String) Uint64
 1 IF LOAD("minter") != SIGNER() THEN GOTO 5
-2 IF LOAD("frozenCollection") == 1 THEN GOTO 5
+2 IF LOAD("frozenCollection") >= 1 THEN GOTO 5
 3 STORE("collection", collection)
 4 RETURN 0
 5 RETURN 1
@@ -41,7 +37,7 @@ End Function
 
 Function Mint(qty Uint64) Uint64
 1 IF LOAD("minter") != SIGNER() THEN GOTO 6
-2 IF LOAD("frozenSupply") == 1 THEN GOTO 6
+2 IF LOAD("frozenSupply") >= 1 THEN GOTO 6
 3 STORE("supply", LOAD("supply") + qty)
 4 SEND_ASSET_TO_ADDRESS(LOAD("minter"), qty, SCID())
 5 RETURN 0

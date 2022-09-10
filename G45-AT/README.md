@@ -13,7 +13,7 @@ The beauty of the standard is that if you modify the code it is very easy to kno
 For an NFT collection you need
 
 - One G45-AT Smart Contract per NFT with frozen supply of 1 (not efficient but only way to get real Asset Token)
-- One G45-ATC Smart Contract for listing all NFTs in the collection (not required though)
+- One G45-C Smart Contract for listing all NFTs in the collection (not required though)
 
 ## What are the functionalities?
 

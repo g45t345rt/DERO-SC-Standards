@@ -9,9 +9,16 @@ The SCID is the token unique hash and the balance represent owners/prints/supply
 
 Status: `DONE - UNDER REVIEW`  
 
-## G45-ATC
+## G45-C
 
-This standard describe a collection of G45-AT Smart Contracts or any other type of assets.  
+This standard describe a collection of Smart Contracts or any type of assets.  
+
+Status: `DONE - UNDER REVIEW`  
+
+## G45-NFT
+
+This is in the simplest Smart Contract for representing a Native Dero NFT.  
+Cheap to mint (unless you have a lot of metadata) with less functionality than G45-AT.  
 
 Status: `DONE - UNDER REVIEW`  
 
@@ -26,7 +33,8 @@ Status: `UNDER DEVELOPMENT`
 
 `G45` and `T345` has no meaning, it's just letters part of my username.  
 `AT` = Asset Token  
-`ATC` = Asset Token Collection
+`C` = Collection
+`NFT` = Non Fungible Token - unique and non-divisible
 
 ## Comparison Overview
 

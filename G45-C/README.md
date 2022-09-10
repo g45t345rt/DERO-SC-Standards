@@ -1,4 +1,4 @@
-# G45-ATC Standard
+# G45-C Standard
 
 `DO NOT USE - STILL UNDER REVIEW`
 
@@ -13,8 +13,8 @@ Set initial collection values - metadataFormat, metadata, freezeMetadata, freeze
 
 - metadataFormat = define metadata format usually json but can be anything
 - metadata = The values/attributes describing the collection
-- freezeCollection = Immutable collection SCID - 0 is false, 1 is true
 - freezeMetadata = Immutable metadata - 0 is false, 1 is true
+- freezeCollection = Immutable collection SCID - 0 is false, 1 is true
 
 ### SetAsset
 
