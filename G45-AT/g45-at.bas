@@ -1,18 +1,18 @@
-Function InitializePrivate(collection String, supply Uint64, metadataFormat String, metadata String, freezeCollection Uint64, freezeSupply Uint64, freezeMetadata Uint64) Uint64
-1 DIM minter as String
-2 IF EXISTS("minter") == 1 THEN GOTO 21
-3 LET minter = SIGNER()
-4 STORE("minter", minter)
-5 STORE("originalMinter", minter)
-6 STORE("type", "G45-AT")
-7 STORE("timestamp", BLOCK_TIMESTAMP())
-8 SEND_ASSET_TO_ADDRESS(minter, supply, SCID())
-9 STORE("collection", collection)
-10 STORE("supply", supply)
+Function InitializePrivate(startSupply Uint64, decimals Uint64, collection String, metadataFormat String, metadata String, freezeCollection Uint64, freezeMetadata Uint64) Uint64
+1 IF EXISTS("minter") == 1 THEN GOTO 17
+2 STORE("minter", SIGNER())
+3 STORE("originalMinter", SIGNER())
+4 STORE("type", "G45-AT")
+5 STORE("timestamp", BLOCK_TIMESTAMP())
+6 SEND_ASSET_TO_ADDRESS(SIGNER(), startSupply, SCID())
+7 STORE("collection", collection)
+8 STORE("maxSupply", 0)
+9 STORE("totalSupply", startSupply)
+10 STORE("decimals", decimals)
 11 STORE("metadataFormat", metadataFormat)
 12 STORE("metadata", metadata)
 13 STORE("frozenCollection", freezeCollection)
-14 STORE("frozenSupply", freezeSupply)
+14 STORE("frozenMint", 0)
 15 STORE("frozenMetadata", freezeMetadata)
 16 RETURN 0
 17 RETURN 1
@@ -35,30 +35,31 @@ Function SetCollection(collection String) Uint64
 5 RETURN 1
 End Function
 
-Function Mint(qty Uint64) Uint64
+Function Mint(amount Uint64) Uint64
 1 IF LOAD("minter") != SIGNER() THEN GOTO 6
-2 IF LOAD("frozenSupply") >= 1 THEN GOTO 6
-3 STORE("supply", LOAD("supply") + qty)
-4 SEND_ASSET_TO_ADDRESS(LOAD("minter"), qty, SCID())
+2 IF LOAD("frozenMint") >= 1 THEN GOTO 6
+3 STORE("totalSupply", LOAD("totalSupply") + amount)
+4 SEND_ASSET_TO_ADDRESS(LOAD("minter"), amount, SCID())
 5 RETURN 0
 6 RETURN 1
 End Function
 
 Function Burn() Uint64
-1 STORE("supply", LOAD("supply") - ASSETVALUE(SCID()))
+1 STORE("totalSupply", LOAD("totalSupply") - ASSETVALUE(SCID()))
 2 RETURN 0
 End Function
 
-Function Freeze(supply Uint64, metadata Uint64, collection Uint64) Uint64
-1 IF LOAD("minter") != SIGNER() THEN GOTO 9
-2 IF supply == 0 THEN GOTO 4
-3 STORE("frozenSupply", 1)
-4 IF metadata == 0 THEN GOTO 6
-5 STORE("frozenMetadata", 1)
-6 IF collection == 0 THEN GOTO 8
-7 STORE("frozenCollection", 1)
-8 RETURN 0
-9 RETURN 1
+Function Freeze(mint Uint64, metadata Uint64, collection Uint64) Uint64
+1 IF LOAD("minter") != SIGNER() THEN GOTO 10
+2 IF mint == 0 THEN GOTO 5
+3 STORE("frozenMint", 1)
+4 STORE("maxSupply", LOAD("totalSupply"))
+5 IF metadata == 0 THEN GOTO 7
+6 STORE("frozenMetadata", 1)
+7 IF collection == 0 THEN GOTO 9
+8 STORE("frozenCollection", 1)
+9 RETURN 0
+10 RETURN 1
 End Function
 
 Function DisplayToken() Uint64

@@ -15,10 +15,16 @@ This standard describe a collection of Smart Contracts or any type of assets.
 
 Status: `DONE - UNDER REVIEW`  
 
+## G45-FAT
+
+A simple form of G45-AT to express a fixed amount of supply.
+
+Status: `DONE - UNDER REVIEW`
+
 ## G45-NFT
 
-This is in the simplest Smart Contract for representing a Native Dero NFT.  
-Cheap to mint (unless you have a lot of metadata) with less functionality than G45-AT.  
+This is the simplest Smart Contract for representing a Native Dero NFT.  
+Cheap to mint (unless you have a lot of metadata) with less functionality than G45-AT or G45-FAT.  
 
 Status: `DONE - UNDER REVIEW`  
 
@@ -31,10 +37,11 @@ Status: `UNDER DEVELOPMENT`
 
 ## Meanings
 
-`G45` and `T345` has no meaning, it's just letters part of my username.  
+`G45` and `T345` has no meaning, it's just letters that are part of my username.  
 `AT` = Asset Token  
 `C` = Collection
-`NFT` = Non Fungible Token - unique and non-divisible
+`NFT` = Non Fungible Token - unique and non-divisible (supply of 1)
+`FAT` = Fixed Asset Token
 
 ## Comparison Overview
 

@@ -1,4 +1,4 @@
-Function InitializePrivate(collection String, metadataFormat String, metadataValue String) Uint64
+Function InitializePrivate(collection String, metadataFormat String, metadata String) Uint64
 1 IF EXISTS("minter") == 1 THEN GOTO 11
 2 STORE("minter", SIGNER())
 3 STORE("type", "G45-NFT")
@@ -7,7 +7,7 @@ Function InitializePrivate(collection String, metadataFormat String, metadataVal
 6 SEND_ASSET_TO_ADDRESS(SIGNER(), 1, SCID())
 7 STORE("collection", collection)
 8 STORE("metadataFormat", metadataFormat)
-9 STORE("metadataValue", metadataValue)
+9 STORE("metadata", metadata)
 10 RETURN 0
 11 RETURN 1
 End Function
