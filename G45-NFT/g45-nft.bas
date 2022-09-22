@@ -20,7 +20,7 @@ Function DisplayToken() Uint64
 5 RETURN 1
 End Function
 
-Function RetrieveToken(amount Uint64) Uint64
+Function RetrieveToken() Uint64
 1 IF LOAD("owner") != ADDRESS_STRING(SIGNER()) THEN GOTO 5
 2 SEND_ASSET_TO_ADDRESS(SIGNER(), 1, SCID())
 3 STORE("owner", "")

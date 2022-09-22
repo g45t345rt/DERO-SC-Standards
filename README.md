@@ -17,9 +17,9 @@ Status: `DONE - UNDER REVIEW`
 
 ## G45-FAT
 
-A simple form of G45-AT to express a fixed amount of supply.
+A simple form of G45-AT to express a fixed amount of supply.  
 
-Status: `DONE - UNDER REVIEW`
+Status: `DONE - UNDER REVIEW`  
 
 ## G45-NFT
 
@@ -39,9 +39,9 @@ Status: `UNDER DEVELOPMENT`
 
 `G45` and `T345` has no meaning, it's just letters that are part of my username.  
 `AT` = Asset Token  
-`C` = Collection
-`NFT` = Non Fungible Token - unique and non-divisible (supply of 1)
-`FAT` = Fixed Asset Token
+`C` = Collection  
+`NFT` = Non Fungible Token - unique and non-divisible (supply of 1)  
+`FAT` = Fixed Asset Token  
 
 ## Comparison Overview
 
