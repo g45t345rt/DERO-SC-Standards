@@ -3,7 +3,7 @@
 `DO NOT USE - STILL UNDER REVIEW`
 
 This is just a smart contract to list your assets in a decentalized way.  
-You can pair this with G45-AT to create an NFT collection.  
+You can pair this with G45-AT/G45-FAT/G45-NFT to create an NFT collection.  
 
 ## Functions
 
@@ -14,26 +14,25 @@ Set initial collection values - metadataFormat, metadata, freezeMetadata, freeze
 - metadataFormat = define metadata format usually json but can be anything
 - metadata = The values/attributes describing the collection
 - freezeMetadata = Immutable metadata - 0 is false, 1 is true
-- freezeCollection = Immutable collection SCID - 0 is false, 1 is true
 
-### SetAsset
+### SetAssets
 
-Set an asset to the collection. Increment `assetCount` if does not already exists.
+Set assets to the collection.
 
-- asset = SCID of the asset smart contract
-- index = whatever index/number representing the asset
+- assets = a json object with SCIDs  (max 100)
+- index = whatever index/number representing the asset list
 
-### DelAsset
+### DelAssets
 
 Remove asset from collection
 
-- asset = SCID of the asset smart contract
+- index = assets index variable
 
 ### Freeze
 
-Freeze metadata or collection. Make variables immutable.  
+Freeze metadata or assets. Make variables immutable.  
 
-- collection = 0:skip, 1:freeze
+- assets = 0:skip, 1:freeze
 - metadata = 0:skip, 1:freeze
 
 ### SetMetadata

@@ -1,46 +1,41 @@
-Function Initialize(metadataFormat String, metadata String, freezeMetadata Uint64, freezeCollection Uint64) Uint64
-1 IF EXISTS("owner") == 1 THEN GOTO 12
+Function Initialize(metadataFormat String, metadata String, freezeMetadata Uint64) Uint64
+1 IF EXISTS("owner") == 1 THEN GOTO 11
 2 STORE("owner", SIGNER())
 3 STORE("originalOwner", SIGNER())
 4 STORE("type", "G45-C")
-5 STORE("frozenCollection", freezeCollection)
+5 STORE("frozenAssets", 0)
 6 STORE("frozenMetadata", freezeMetadata)
 7 STORE("metadataFormat", metadataFormat)
 8 STORE("metadata", metadata)
-9 STORE("assetCount", 0)
-10 STORE("timestamp", BLOCK_TIMESTAMP())
-11 RETURN 0
-12 RETURN 1
+9 STORE("timestamp", BLOCK_TIMESTAMP())
+10 RETURN 0
+11 RETURN 1
 End Function
 
-Function Freeze(collection Uint64, metadata Uint64) Uint64
+Function Freeze(assets Uint64, metadata Uint64) Uint64
 1 IF LOAD("owner") != SIGNER() THEN GOTO 7
-2 IF collection == 0 THEN GOTO 4
-3 STORE("frozenCollection", 1)
+2 IF assets == 0 THEN GOTO 4
+3 STORE("frozenAssets", 1)
 4 IF metadata == 0 THEN GOTO 6
 5 STORE("frozenMetadata", 1)
 6 RETURN 0
 7 RETURN 1
 End Function
 
-Function SetAsset(asset String, index Uint64) Uint64
-1 IF LOAD("owner") != SIGNER() THEN GOTO 7
-2 IF LOAD("frozenCollection") >= 1 THEN GOTO 7
-3 IF EXISTS("asset_" + asset) == 1 THEN GOTO 5
-4 STORE("assetCount", LOAD("assetCount") + 1)
-5 STORE("asset_" + asset, index)
-6 RETURN 0
-7 RETURN 1
+Function SetAssets(index Uint64, assets String) Uint64
+1 IF LOAD("owner") != SIGNER() THEN GOTO 5
+2 IF LOAD("frozenAssets") >= 1 THEN GOTO 5
+3 STORE("assets_" + index, assets)
+4 RETURN 0
+5 RETURN 1
 End Function
 
-Function DelAsset(asset String) Uint64
-1 IF LOAD("owner") != SIGNER() THEN GOTO 7
-2 IF LOAD("frozenCollection") >= 1 THEN GOTO 7
-3 IF EXISTS("asset_" + asset) == 0 THEN GOTO 7
-4 DELETE("asset_" + asset)
-5 STORE("assetCount", LOAD("assetCount") - 1)
-6 RETURN 0
-7 RETURN 1
+Function DelAssets(index Uint64) Uint64
+1 IF LOAD("owner") != SIGNER() THEN GOTO 5
+2 IF LOAD("frozenAssets") >= 1 THEN GOTO 5
+3 DELETE("assets_" + index)
+4 RETURN 0
+5 RETURN 1
 End Function
 
 Function SetMetadata(format String, metadata String) Uint64
