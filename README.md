@@ -28,12 +28,18 @@ Cheap to mint (unless you have a lot of metadata) with less functionality than G
 
 Status: `DONE - VERIFIED`  
 
+## G45-NAME
+
+Register names as NFT instead of address string.  
+
+Status: `PROPOSAL - NOT TESTED`  
+
 ## T345
 
 This standard uses one Smart Contract to represent an entire collection of assets.  
 The Asset unique id is the SCID() + index number. It is not a real asset token.  
 
-Status: `UNDER DEVELOPMENT`  
+Status: `UNDER DEVELOPMENT - USELESS I WOULD SAY`  
 
 ## Meanings
 
