@@ -14,7 +14,7 @@ Function RegisterName(name String, setAddr Uint64) Uint64
 90 IF setAddr == 0 THEN GOTO 140
 100 IF ADDRESS_STRING(signer) == "" THEN GOTO 140
 110 STORE("addr_" + name, signer)
-120 SEND_ASSET_TO_ADDRESS(scid, 1, signer)
+120 SEND_ASSET_TO_ADDRESS(signer, 1, scid)
 130 RETURN 0
 140 RETURN 1
 End Function
@@ -27,7 +27,7 @@ Function SetAddress() Uint64
 50 IF EXISTS("name_" + scid) == 0 THEN GOTO 100
 60 LET name = LOAD("name_" + scid)
 70 STORE("addr_" + name, signer)
-80 SEND_ASSET_TO_ADDRESS(scid, 1, signer)
+80 SEND_ASSET_TO_ADDRESS(signer, 1, scid)
 90 RETURN 0
 100 RETURN 1
 End Function
