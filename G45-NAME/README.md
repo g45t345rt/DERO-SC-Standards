@@ -1,5 +1,7 @@
 # Proposal for Address Names as Native Token
 
+**NOT TESTED**
+
 ## Problem
 
 Names are currently associated with an address only.  
@@ -7,17 +9,20 @@ You can transfer it to another address but can't really sell it in a trustless m
 
 ## Solution
 
-Match a name to a native token instead.  
-The owner of the token can then decide to associate the name with his address.
-The name could also be sold trustlessly on a NFT plaform like <https://deronfts.com>
+Bind the name to a native token instead of an address. The NFT becomes the key to bind the address.  
+The name can now be sold trustlessly on a NFT plaform like <https://deronfts.com>  
+Make it so that you have at least a year to renew the name. Expired name can be overwrite by anyone.  
+Free to attach a name and renew.  
 
-## Steps to mint/register a name
+## Functions
 
-1. Create a G45-NFT-1 Smart Contract
-2. Choose a name with the scid and call `RegisterName` function from the Names Smart Contract. The scid will forever be linked with the name.
-3. Profit?!?!
+- Attach (register name with NFT smart contract)
+- Detach (remove name, nft & address binding)
+- BindAddress (set or change wallet address associated with the signer)
+- Renew (reset expiration date, block_timestam+1year)
 
-## Notes
+## Note
 
-1. If you burn the token you can never change the address back.
-2. Someone can mint a token which is not an NFT and associate it with a name. This basically give the possibility to have multiple owners changing the address. Thats bad because someone could sell the token and then change the address back to himself after :S To avoid this the website would only sell verified real G45-NAME NFT.
+Someone can deploy a token smart contract instead of an NFT.  
+This basically give the possibility to have multiple owners binding the signer address. Best to verify smart contract code associated with the name and see if it's an actual NFT.  
+(NFT verification can be done programmatically)  
